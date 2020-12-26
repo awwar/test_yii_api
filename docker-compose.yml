@@ -1,0 +1,28 @@
+version: '3.4'
+services:
+    app:
+        container_name: test_app
+        image: yiisoftware/yii2-php:7.4-fpm
+        volumes:
+            - ~/.composer-docker/cache:/root/.composer/cache:delegated
+            - ./:/app:delegated
+        depends_on:
+            - db
+    nginx:
+        container_name: test_nginx
+        build: docker/nginx
+        ports:
+            - 80:80
+        depends_on:
+            - app
+        volumes:
+            - ./:/app:delegated
+            - ./docker/nginx/log/:/var/log/nginx
+        links:
+            - app
+    db:
+        container_name: test_db
+        build: docker/db
+        env_file: db.env
+        ports:
+            - 3306:3306
