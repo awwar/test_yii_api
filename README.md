@@ -24,3 +24,6 @@
 #### Коллекция постмена уже в проекте:
 
 Файл называется ```test_api.postman_collection.json```
+
+Если после отправки запроса приходят сообщения "Your request was made with invalid credentials." - то нужно залезть в 
+бд и использовать auth_key любого юзера с status = 10.
