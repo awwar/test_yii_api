@@ -1,72 +1,84 @@
 <?php
 
+use app\components\request_parsers\DummyRequestParser;
+use app\components\request_parsers\ForbiddenTypeRequestParser;
+use app\modules\v1\Module;
+use yii\rest\UrlRule;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic',
-    'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
-    'aliases' => [
+    'id'         => 'basic',
+    'basePath'   => dirname(__DIR__),
+    'bootstrap'  => ['log'],
+    'aliases'    => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-    'components' => [
-        'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6',
+    'modules'    => [
+        'v1' => [
+            'class' => Module::class,
         ],
-        'cache' => [
+    ],
+    'components' => [
+        'request'      => [
+            'cookieValidationKey' => '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6',
+            'parsers'             => [
+                'application/x-www-form-urlencoded' => DummyRequestParser::class,
+                '*'                                 => ForbiddenTypeRequestParser::class,
+            ],
+        ],
+        'cache'        => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
-            'identityClass' => 'app\models\User',
+        'user'         => [
+            'identityClass'   => 'app\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
+        'mailer'       => [
+            'class'            => 'yii\swiftmailer\Mailer',
             'useFileTransport' => true,
         ],
-        'log' => [
+        'log'          => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
+            'targets'    => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class'  => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
             ],
         ],
-        'db' => $db,
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
+        'db'           => $db,
+        'urlManager'   => [
+            'enablePrettyUrl'     => true,
+            'enableStrictParsing' => true,
+            'showScriptName'      => false,
+            'rules'               => [
+                [
+                    'class'      => UrlRule::class,
+                    'controller' => ['v1/user'],
+                    'except'     => ['index'],
+                    'pluralize'  => false,
+                ],
             ],
         ],
     ],
-    'params' => $params,
+    'params'     => $params,
 ];
 
 if (YII_ENV_DEV) {
-    // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
 
