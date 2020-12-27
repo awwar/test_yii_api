@@ -23,8 +23,8 @@ $config = [
     ],
     'components' => [
         'request'      => [
-            'cookieValidationKey' => '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6',
-            'parsers'             => [
+            'cookieValidationKey'    => '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6',
+            'parsers'                => [
                 'application/x-www-form-urlencoded' => DummyRequestParser::class,
                 '*'                                 => ForbiddenTypeRequestParser::class,
             ],
@@ -34,7 +34,8 @@ $config = [
         ],
         'user'         => [
             'identityClass'   => 'app\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
+            'enableSession'   => false,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
