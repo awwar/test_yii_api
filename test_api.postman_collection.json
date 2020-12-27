@@ -7,13 +7,28 @@
 	"item": [
 		{
 			"name": "get_user",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "api.test.local",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "{{url}}/v1/user/100",
+					"raw": "http://127.0.0.1/v1/user/100",
+					"protocol": "http",
 					"host": [
-						"{{url}}"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
 					"path": [
 						"v1",
@@ -26,9 +41,20 @@
 		},
 		{
 			"name": "new_user",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "api.test.local",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "urlencoded",
 					"urlencoded": [
@@ -50,9 +76,13 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/v1/user",
+					"raw": "http://127.0.0.1/v1/user",
+					"protocol": "http",
 					"host": [
-						"{{url}}"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
 					"path": [
 						"v1",
@@ -64,9 +94,20 @@
 		},
 		{
 			"name": "update_user",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "api.test.local",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "urlencoded",
 					"urlencoded": [
@@ -78,9 +119,13 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/v1/user/100",
+					"raw": "http://127.0.0.1/v1/user/100",
+					"protocol": "http",
 					"host": [
-						"{{url}}"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
 					"path": [
 						"v1",
@@ -93,13 +138,28 @@
 		},
 		{
 			"name": "delete_user",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "api.test.local",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "{{url}}/v1/user/100",
+					"raw": "http://127.0.0.1/v1/user/100",
+					"protocol": "http",
 					"host": [
-						"{{url}}"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
 					"path": [
 						"v1",
