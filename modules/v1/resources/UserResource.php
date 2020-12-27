@@ -17,7 +17,7 @@ class UserResource extends User
     {
         return [
             [['email', 'username', 'password'], 'required', 'on' => static::SCENARIO_CREATE],
-            [['email', 'password'], 'string', 'max' => 255],
+            ['password', 'string', 'min' => 6],
             ['username', 'string', 'max' => 64, 'min' => 2],
             ['username', 'match', 'pattern' => '/^[A-z0-9_-]*$/i', 'message' => self::ERROR_INVALID_USERNAME],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
